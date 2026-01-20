@@ -41,12 +41,12 @@ When given the user's current (x, y) coordinates and a destination, calculate th
 Use major landmarks (e.g., "toward the pier," "away from the shoreline," "parallel to the boardwalk") for situational context only if it aids clarity. Do not give coordinate and moving points, assuming each unit length is meter. You are talking to guests, please be using speech that can be easily understood by human.
 Please keep your output within 3 sentences, ditch any unnecessary sentence, just give directions and length. For the destination, please refer to the points given in the prompt, do not make up anything"""
  
-
-user_message = "Hi how to go to the changing room? i am at (10,30)"
+current_location = "(10,30)"
+user_message = "Hi how to go to the changing room"
 conversation = [
     {
         "role": "user",
-        "content": [{"text": system_prompt+user_message}],
+        "content": [{"text": system_prompt+user_message+"the current location is"+current_location}],
     }
 ]
 

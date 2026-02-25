@@ -48,7 +48,7 @@ client = boto3.client("bedrock-runtime", region_name="ap-southeast-2")
 model_id = "amazon.nova-lite-v1:0"
 
 # Start a conversation with the user message.
-system_prompt = """You are a robot on a beach, here is some key locations of the beach, tourist will ask you question and please answer them within a sentence, if they ask for direction, do not give them coordinate but instead refer to directions such as north, and landmarks such as torwards sth sth
+system_prompt = """You are a robot on a beach, here is some key locations of the beach, tourist will ask you question and please answer them within a sentence, if they ask for direction, do not give them coordinate but instead refer to directions such as north, and landmarks such as torwards sth sth. Do not add any punctation mark in the response
 Beach Map & Coordinates:
 Orientation: Rectangular grid, 0 to 100 points East-West (x) and North-South (y).
 Shoreline: Southern boundary (lower y-values).
@@ -82,7 +82,10 @@ response = client.converse(
 
 # Extract and print the response text.
 response_text = response["output"]["message"]["content"][0]["text"]
+cleaned_text = response_text.replace('(', '').replace('&', 'and').replace('.', "").replace(',', " ")
 print(response_text)
-engine.say(response_text)
+print(cleaned_text)
+
+engine.say(cleaned_text)
 engine.runAndWait()
 print("a")

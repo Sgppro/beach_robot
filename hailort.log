@@ -1984,4 +1984,9 @@
 [2026-02-28 17:41:02.038] [30649] [HailoRT] [info] [queue_elements.cpp:68] [operator()] Thread in element UserBuffQEl3beach_robot/conv52 is not running anymore, exiting..
 [2026-02-28 17:41:02.038] [1780] [HailoRT] [info] [queue_elements.cpp:46] [~BaseQueueElement] Queue element UserBuffQEl3beach_robot/conv52 has 0 frames in his Queue on destruction
 [2026-02-28 17:41:02.038] [30650] [HailoRT] [info] [edge_elements.cpp:396] [run_pull] Reading from stream was aborted!
-[2026-02-28 17:41:02.038] [3
+[2026-02-28 17:41:02.038] [3[2026-03-30 16:17:31.978] [1756] [HailoRT] [info] [vdevice.cpp:535] [create] Creating vdevice with params: device_count: 1, scheduling_algorithm: NONE, multi_process_service: false
+[2026-03-30 16:17:31.991] [1756] [HailoRT] [error] [vdevice.cpp:863] [create_devices] CHECK failed - Failed to create vdevice. there are not enough free devices. requested: 1, found: 0
+[2026-03-30 16:17:31.994] [1756] [HailoRT] [error] [vdevice.cpp:662] [create] CHECK_SUCCESS failed with status=HAILO_OUT_OF_PHYSICAL_DEVICES(74)
+[2026-03-30 16:17:31.994] [1756] [HailoRT] [error] [shared_resource_manager.hpp:81] [register_resource] CHECK_SUCCESS failed with status=HAILO_OUT_OF_PHYSICAL_DEVICES(74)
+[2026-03-30 16:17:31.994] [1756] [HailoRT] [error] [vdevice.cpp:133] [create] CHECK_SUCCESS failed with status=HAILO_OUT_OF_PHYSICAL_DEVICES(74)
+[2026-03-30 16:17:31.994] [1756] [HailoRT] [error] [vdevice.cpp:567] [create] CHECK_SUCCESS failed with status=HAILO_OUT_OF_PHYSICAL_DEVICES(74)

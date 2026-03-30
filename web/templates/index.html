@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Map Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .map-container {
+            position: relative;
+            display: inline-block;
+            border: 2px solid #333;
+        }
+        .map-image {
+            display: block;
+            max-width: 800px; /* Adjust this based on your map size */
+        }
+        .dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white;
+            /* This centers the dot precisely on the coordinate */
+            transform: translate(-50%, -50%);
+            transition: top 0.3s, left 0.3s;
+        }
+        .controls {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            display: inline-block;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Live Robot Location</h2>
+
+    <div class="map-container">
+        <img src="{{ url_for('static', filename='map.png') }}" alt="Robot Map" class="map-image">
+        
+        <div class="dot" style="left: {{ x }}px; top: {{ y }}px;"></div>
+    </div>
+
+    <div class="controls">
+        <form method="POST">
+            <label for="x_coord">X Coordinate (pixels):</label>
+            <input type="number" id="x_coord" name="x_coord" value="{{ x }}" required>
+            
+            &nbsp;&nbsp; <label for="y_coord">Y Coordinate (pixels):</label>
+            <input type="number" id="y_coord" name="y_coord" value="{{ y }}" required>
+            
+            <button type="submit">Update Map</button>
+        </form>
+    </div>
+
+</body>
+</html>

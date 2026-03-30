@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import RPi.GPIO as GPIO
+import time
+
+# ===== CONFIGURATION =====
+SERVO_PIN = 18           # GPIO pin connected to servo signal line
+PWM_FREQ = 50            # 50 Hz (period = 20 ms)
+
+# Pulse width range (in milliseconds) for 0° and 180°
+# Adjust these values if your servo expects a different range.
+PULSE_MIN = 1.0          # ms for 0°
+PULSE_MAX = 2.0          # ms for 180°
+
+# ===== HELPER FUNCTIONS =====
+def angle_to_duty(angle):
+    """
+    Convert angle (0-180) to duty cycle percentage for 50 Hz PWM.
+    Formula: duty = (pulse_width / 20.0) * 100
+    pulse_width = PULSE_MIN + (angle / 180.0) * (PULSE_MAX - PULSE_MIN)
+    """
+    pulse_width = PULSE_MIN + (angle / 180.0) * (PULSE_MAX - PULSE_MIN)
+    duty = (pulse_width / 20.0) * 100.0
+    return duty
+
+def set_angle(pwm, angle):
+    """Set servo to a specific angle (0-180) and wait briefly to allow movement."""
+    duty = angle_to_duty(angle)
+    pwm.ChangeDutyCycle(duty)
+    time.sleep(0.3)      # Allow time for servo to reach position
+
+# ===== MAIN =====
+def main():
+    # GPIO setup
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(SERVO_PIN, GPIO.OUT)
+
+    # Initialize PWM on the pin
+    pwm = GPIO.PWM(SERVO_PIN, PWM_FREQ)
+    pwm.start(0)          # Start with 0% duty cycle (no signal)
+
+    try:
+        set_angle(pwm, 0)
+    except KeyboardInterrupt:
+        print("\nStopped by user")
+
+    finally:
+        # Cleanup
+        pwm.stop()
+        GPIO.cleanup()
+        print("GPIO cleaned up")
+
+if __name__ == "__main__":
+    main()

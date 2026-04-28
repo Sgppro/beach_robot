@@ -89,6 +89,11 @@ def straight(speed, direction):
         move(speed, "backward", "left")
         move(speed, "backward", "right")
 
+
+class MotorController:
+    def execute(self, command):
+        if command == "stop":
+            stop()
 straight(100, 0)
 time.sleep(1.5)
 stop()
